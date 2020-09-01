@@ -1,32 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage("Webhook") {
-            steps {
-                waitForQualityGate(webhookSecretId: 'jenkins')
+        stage('Build'){
+            steps{
+                echo 'Hello from Jenkins and Github aws'
             }
         }
-        stage('SonarQube analysis 1') {
-            steps {
-                withSonarQubeEnv('sonarserver'){
-                    sh 'mvn clean package sonar:sonar'
-                }
-            }
-        }
-        stage("Quality Gate 1") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
-        stage('SonarQube analysis 2') {
-            steps {
-                sh 'gradle sonarqube'
-            }
-        }
-        stage("Quality Gate 2") {
-            steps {
-                waitForQualityGate abortPipeline: true
-            }
-        }
-    }
+  }
 }
