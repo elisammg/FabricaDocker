@@ -1,12 +1,20 @@
-pipeline{
-	agent{
-		docker{image: 'fabrica:1.0'}
-	}
-	stages{
-		stage('Test'){
-			steps{
-				sh 'fabrica --version'
-			}
-		}
-	}
-}	
+pipeline {
+        agent none
+        stages {
+          stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('sonarserver') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+          }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+        }
+      }
