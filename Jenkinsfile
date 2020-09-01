@@ -1,9 +1,11 @@
 node{
     stage('SCM Checkout'){
+        
         git 'https://github.com/elisammg/FabricaDocker'
     }
     stage('Compile-Package'){
-        sh 'mvn package'
+        def mvnHome = tool name: 'maven', type: 'maven'
+        sh "$mvnHome/bin/mvn package"
     }
     
     stage('Email Notification'){
