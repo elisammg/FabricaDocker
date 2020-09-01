@@ -2,7 +2,7 @@ pipeline{
         agent any  
 
         stages{
-              stage('Quality Gate Statuc Check'){}
+              stage('Quality Gate Statuc Check'){
                   steps{
                       script{
                       withSonarQubeEnv('sonarserver') { 
