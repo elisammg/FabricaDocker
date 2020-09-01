@@ -8,7 +8,9 @@ pipeline {
         }
         stage('SonarQube analysis 1') {
             steps {
-                sh 'mvn clean package sonar:sonar'
+                withSonarQubeEnv('sonarserver'){
+                    sh 'mvn clean package sonar:sonar'
+                }
             }
         }
         stage("Quality Gate 1") {
