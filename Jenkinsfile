@@ -4,7 +4,7 @@ node{
     }
     
     stage('Email Notification'){
-        mail bcc: '', body: 'Jenkins', cc: '', from: '', replyTo: '', subject: 'Primera prueba', to: 'elisamargarita.2899@gmail.com'
+        mail bcc: '', body: 'Jenkins', cc: '', from: '', replyTo: '', subject: 'Hello from Dev', to: 'elisamargarita.2899@gmail.com'
     }
     
     stage('Compile-Package'){
