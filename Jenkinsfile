@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage("Webhook") {
+            steps {
+                waitForQualityGate(webhookSecretId: 'jenkins')
+            }
+        }
         stage('SonarQube analysis 1') {
             steps {
                 sh 'mvn clean package sonar:sonar'
